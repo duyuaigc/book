@@ -31,14 +31,21 @@
             font-family: 'Microsoft YaHei', 'SimSun', 'sans-serif';
         }
 
-        /* 统一卡片图片的尺寸，并使用 object-fit 确保不变形 */
+        /* 响应式图书封面高度 */
         .book-cover {
             width: 100%;
-            height: 320px; /* 固定高度，确保卡片高度一致 */
+            height: 250px; /* 默认：手机端使用较短的高度 */
             object-fit: cover;
             object-position: top; /* 确保封面顶部清晰可见 */
         }
         
+        /* 在平板及以上尺寸使用较高的高度 */
+        @media (min-width: 640px) { 
+            .book-cover {
+                height: 300px;
+            }
+        }
+
         /* 激活 Tab 样式 */
         .tab-active {
             border-color: #1D4ED8;
@@ -46,7 +53,7 @@
             font-weight: 600;
         }
 
-        /* 隐藏滚动条但保留滚动功能，适用于移动端 */
+        /* 隐藏滚动条但保留滚动功能 */
         .hide-scrollbar {
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
@@ -62,7 +69,7 @@
             border-top: 4px solid #1D4ED8;
             width: 40px;
             height: 40px;
-            -webkit-animation: spin 1s linear infinite; /* Safari */
+            -webkit-animation: spin 1s linear infinite;
             animation: spin 1s linear infinite;
         }
 
@@ -79,24 +86,25 @@
 </head>
 <body class="bg-light-bg text-dark-text font-sans font-chinese antialiased">
 
-    <!-- 头部导航栏 (Sticky Header) -->
+    <!-- 头部导航栏 (Sticky Header) - 优化移动端堆叠 -->
     <header class="sticky top-0 z-10 bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center">
-            <h1 class="text-3xl font-extrabold text-primary-blue tracking-tight">杜雨 博士</h1>
-            <nav id="contact-nav" class="mt-2 sm:mt-0 space-x-4 text-sm text-gray-600">
-                <a href="mailto:duyu@weikezhi.cn" class="hover:text-primary-blue transition duration-150">邮箱: duyu@weikezhi.cn</a>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row justify-between items-center">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-primary-blue tracking-tight">杜雨 博士</h1>
+            <!-- 联系方式更紧凑，并在手机端堆叠 -->
+            <nav id="contact-nav" class="mt-2 sm:mt-0 flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-4 text-xs sm:text-sm text-gray-600 items-center">
+                <a href="mailto:duyu@weikezhi.cn" class="hover:text-primary-blue transition duration-150">📧 duyu@weikezhi.cn</a>
                 <span class="hidden sm:inline">|</span>
-                <span class="text-sm">微信号: duyuaigc</span>
+                <span class="text-xs sm:text-sm">💬 duyuaigc</span>
             </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12">
 
         <!-- 作者简介区域 -->
-        <section id="author-bio" class="bg-white p-8 rounded-xl shadow-lg mb-12">
-            <h2 class="text-2xl font-bold text-dark-text mb-4 border-b pb-2 border-primary-blue/30">作者简介</h2>
-            <div class="text-gray-700 leading-relaxed space-y-3 text-base">
+        <section id="author-bio" class="bg-white p-6 sm:p-8 rounded-xl shadow-lg mb-8 sm:mb-12">
+            <h2 class="text-xl sm:text-2xl font-bold text-dark-text mb-3 border-b pb-2 border-primary-blue/30">作者简介</h2>
+            <div class="text-gray-700 leading-relaxed space-y-2 text-sm sm:text-base">
                 <p>未可知人工智能研究院院长。</p>
                 <p>第十一届当当影响力作家。</p>
                 <p>深耕风险投资和科技创新领域，兼具学术研究与产业实践的双重背景。</p>
@@ -107,23 +115,23 @@
 
         <!-- 出版物展示区域 -->
         <section id="publications-section">
-            <h2 class="text-2xl font-bold text-dark-text mb-6 border-b pb-2 border-primary-blue/30">已出版作品</h2>
+            <h2 class="text-xl sm:text-2xl font-bold text-dark-text mb-5 border-b pb-2 border-primary-blue/30">已出版作品</h2>
 
-            <!-- 类别筛选 (Tabs) -->
-            <div class="flex space-x-1 p-1 mb-8 border-b border-gray-200 overflow-x-auto hide-scrollbar">
-                <button data-category="人工智能" class="tab-button px-4 py-2 text-lg text-gray-600 transition duration-300 border-b-2 border-transparent hover:border-primary-blue hover:text-primary-blue whitespace-nowrap">
+            <!-- 类别筛选 (Tabs) - 确保水平滚动 -->
+            <div class="flex space-x-1 p-1 mb-6 border-b border-gray-200 overflow-x-auto hide-scrollbar">
+                <button data-category="人工智能" class="tab-button px-3 py-2 text-base sm:text-lg text-gray-600 transition duration-300 border-b-2 border-transparent hover:border-primary-blue hover:text-primary-blue whitespace-nowrap">
                     人工智能 (AI)
                 </button>
-                <button data-category="区块链" class="tab-button px-4 py-2 text-lg text-gray-600 transition duration-300 border-b-2 border-transparent hover:border-primary-blue hover:text-primary-blue whitespace-nowrap">
+                <button data-category="区块链" class="tab-button px-3 py-2 text-base sm:text-lg text-gray-600 transition duration-300 border-b-2 border-transparent hover:border-primary-blue hover:text-primary-blue whitespace-nowrap">
                     区块链 (Blockchain)
                 </button>
-                <button data-category="创投" class="tab-button px-4 py-2 text-lg text-gray-600 transition duration-300 border-b-2 border-transparent hover:border-primary-blue hover:text-primary-blue whitespace-nowrap">
+                <button data-category="创投" class="tab-button px-3 py-2 text-base sm:text-lg text-gray-600 transition duration-300 border-b-2 border-transparent hover:border-primary-blue hover:text-primary-blue whitespace-nowrap">
                     创投 (Venture Capital)
                 </button>
             </div>
 
-            <!-- 图书列表容器 -->
-            <div id="books-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- 图书列表容器 - 保持移动端单列，平板以上多列 -->
+            <div id="books-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
                 <!-- Books will be rendered here by JavaScript -->
                 <div id="loading-indicator" class="col-span-full flex justify-center items-center py-10">
                     <div class="loader"></div>
@@ -133,8 +141,8 @@
     </main>
 
     <!-- 底部 (Footer) -->
-    <footer class="bg-white border-t mt-12 py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+    <footer class="bg-white border-t mt-8 py-5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-xs sm:text-sm">
             <p>&copy; 2025 杜雨博士. 版权所有.</p>
         </div>
     </footer>
@@ -302,16 +310,16 @@
                                  class="book-cover rounded-t-xl"
                                  onerror="this.onerror=null;this.src='${fallbackImg}';"
                             >
-                            <span class="absolute top-0 right-0 bg-primary-blue text-white text-xs font-semibold px-3 py-1 rounded-bl-lg">${book.pubDate}</span>
+                            <span class="absolute top-0 right-0 bg-primary-blue text-white text-xs font-semibold px-2 py-1 rounded-bl-lg">${book.pubDate}</span>
                         </div>
-                        <div class="p-5">
-                            <h3 class="text-xl font-bold text-dark-text mb-2 line-clamp-2">${book.title}</h3>
-                            <div class="space-y-1 text-sm text-gray-600">
+                        <div class="p-4 sm:p-5">
+                            <h3 class="text-lg sm:text-xl font-bold text-dark-text mb-2 line-clamp-2">${book.title}</h3>
+                            <div class="space-y-1 text-xs sm:text-sm text-gray-600">
                                 <p><strong>出版社:</strong> ${book.publisher}</p>
                                 <p><strong>ISBN:</strong> ${book.isbn}</p>
                                 <p><strong>字数:</strong> ${book.wordCount}</p>
                             </div>
-                            <a href="${book.jdLink}" target="_blank" class="mt-4 inline-flex items-center justify-center w-full px-4 py-2 bg-primary-blue text-white text-base font-medium rounded-lg shadow-md hover:bg-blue-700 transition duration-150">
+                            <a href="${book.jdLink}" target="_blank" class="mt-3 sm:mt-4 inline-flex items-center justify-center w-full px-4 py-2 bg-primary-blue text-white text-sm sm:text-base font-medium rounded-lg shadow-md hover:bg-blue-700 transition duration-150">
                                 <span>京东购买</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4m-4-7h4m0 0v4m-4-4L9 15" />
@@ -332,6 +340,9 @@
                     const categoryData = publications.find(p => p.category === category);
                     
                     if (categoryData && categoryData.books.length > 0) {
+                        // 确保新书排在前面 (按出版日期排序) - 可以在此处实现按日期排序
+                        categoryData.books.sort((a, b) => new Date(b.pubDate.replace('年', '-').replace('月', '')) - new Date(a.pubDate.replace('年', '-').replace('月', '')));
+
                         const booksHtml = categoryData.books.map(createBookCard).join('');
                         booksContainer.innerHTML = booksHtml;
                     } else {
@@ -363,7 +374,7 @@
 
             // Initial load: Default to the first category ("人工智能")
             if (tabButtons.length > 0) {
-                tabButtons[0].classList.add('tab-active');
+                // 模拟点击第一个按钮，触发样式和内容加载
                 tabButtons[0].click();
             }
         });
