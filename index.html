@@ -3,261 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>杜雨博士 | 出版物与作者简介</title>
-    <!-- 引入 Tailwind CSS -->
+    <title>杜雨博士出版物</title>
+    <!-- 引入 Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 配置 Tailwind 以支持中文和 Inter 字体 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+                        // 额外添加对中文友好的字体
+                        'chinese': ['Microsoft YaHei', 'SimSun', 'sans-serif']
+                    },
+                    colors: {
+                        'primary-blue': '#1D4ED8', // Darker Blue for main elements
+                        'light-bg': '#F9FAFB',
+                        'dark-text': '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* 使用 Inter 字体，适用于中英文字符 */
-        body {
-            font-family: 'Inter', 'Microsoft YaHei', 'SimHei', sans-serif;
-            background-color: #f8fafc; /* Slate-50 background */
+        /* 确保所有中文文本都使用中文字体 */
+        .font-chinese {
+            font-family: 'Microsoft YaHei', 'SimSun', 'sans-serif';
         }
-        /* 针对移动端优化，确保图片加载失败时的占位符 */
+
+        /* 统一卡片图片的尺寸，并使用 object-fit 确保不变形 */
         .book-cover {
-            height: 300px; /* Consistent height for covers */
-            object-fit: cover;
             width: 100%;
-            transition: transform 0.3s ease;
+            height: 320px; /* 固定高度，确保卡片高度一致 */
+            object-fit: cover;
+            object-position: top; /* 确保封面顶部清晰可见 */
         }
-        .book-cover:hover {
-            transform: scale(1.03);
+        
+        /* 激活 Tab 样式 */
+        .tab-active {
+            border-color: #1D4ED8;
+            color: #1D4ED8;
+            font-weight: 600;
         }
-        .skeleton-load {
-            background-color: #e2e8f0; /* Slate-200 for skeleton effect */
-            animation: pulse 1.5s infinite;
+
+        /* 隐藏滚动条但保留滚动功能，适用于移动端 */
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+
+        /* 简单的 Loading 动画 */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #1D4ED8;
+            width: 40px;
+            height: 40px;
+            -webkit-animation: spin 1s linear infinite; /* Safari */
+            animation: spin 1s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="bg-light-bg text-dark-text font-sans font-chinese antialiased">
 
-    <!-- Header / Author Profile Section -->
-    <header class="bg-white shadow-lg">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div class="lg:flex lg:items-center lg:space-x-12">
-                <!-- Photo and Name (Left/Top) -->
-                <div class="flex-shrink-0 mb-8 lg:mb-0">
-                    <img class="w-48 h-48 md:w-56 md:h-56 rounded-full mx-auto object-cover shadow-2xl ring-4 ring-indigo-500/50" 
-                         src="https://bkimg.cdn.bcebos.com/pic/6609c93d70cf3bc79f3dc841a658ada1cd11728bfc5c?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXIvYmFpa2UyNzI,g_7,xp_5,yp_5,P_20/resize,m_lfit,limit_1,h_1080" 
-                         alt="杜雨博士照片" 
-                         onerror="this.onerror=null;this.src='https://placehold.co/224x224/6366f1/ffffff?text=Du+Yu+PhD';"
-                    >
-                    <h1 class="mt-4 text-center text-4xl font-extrabold tracking-tight text-indigo-700">
-                        杜雨 博士
-                    </h1>
-                    <p class="text-center text-xl font-medium text-gray-500">
-                        未可知人工智能研究院院长
-                    </p>
-                </div>
-
-                <!-- Biography (Right/Bottom) -->
-                <div class="flex-1">
-                    <h2 class="text-2xl font-semibold mb-4 border-b pb-2 text-indigo-600">作者简介</h2>
-                    <ul class="space-y-3 text-lg leading-relaxed list-disc list-inside">
-                        <li>第十一届当当影响力作家。</li>
-                        <li>深耕风险投资和科技创新领域，兼具学术研究与产业实践的双重背景。</li>
-                        <li>毕业于北京大学，先后工作于腾讯及红杉资本，参与多家知名企业的投资并购、并担任多家科技公司董事。</li>
-                        <li>在“人工智能+X”方向孵化有教育、医疗、心理、艺术等领域的初创企业。</li>
-                        <li>担任《生成式人工智能数据应用合规指南》团体标准起草人。</li>
-                    </ul>
-
-                    <!-- Contact Info -->
-                    <div class="mt-8 pt-4 border-t border-gray-200">
-                        <h3 class="text-xl font-semibold mb-2 text-indigo-600">联系方式</h3>
-                        <p class="flex items-center space-x-2 text-gray-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
-                            <a href="mailto:duyu@weikezhi.cn" class="hover:text-indigo-700">duyu@weikezhi.cn</a>
-                        </p>
-                        <p class="flex items-center space-x-2 text-gray-600 mt-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
-                            <span>微信号: duyuaigc</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
+    <!-- 头部导航栏 (Sticky Header) -->
+    <header class="sticky top-0 z-10 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center">
+            <h1 class="text-3xl font-extrabold text-primary-blue tracking-tight">杜雨 博士</h1>
+            <nav id="contact-nav" class="mt-2 sm:mt-0 space-x-4 text-sm text-gray-600">
+                <a href="mailto:duyu@weikezhi.cn" class="hover:text-primary-blue transition duration-150">邮箱: duyu@weikezhi.cn</a>
+                <span class="hidden sm:inline">|</span>
+                <span class="text-sm">微信号: duyuaigc</span>
+            </nav>
         </div>
     </header>
 
-    <!-- Publications Section -->
-    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8 border-b-2 border-indigo-500 pb-3">
-            已出版作品
-        </h2>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-        <!-- Category Filter/Tabs -->
-        <div class="mb-8 flex flex-wrap gap-4" id="category-tabs">
-            <!-- Buttons will be generated by JS -->
-        </div>
+        <!-- 作者简介区域 -->
+        <section id="author-bio" class="bg-white p-8 rounded-xl shadow-lg mb-12">
+            <h2 class="text-2xl font-bold text-dark-text mb-4 border-b pb-2 border-primary-blue/30">作者简介</h2>
+            <div class="text-gray-700 leading-relaxed space-y-3 text-base">
+                <p>未可知人工智能研究院院长。</p>
+                <p>第十一届当当影响力作家。</p>
+                <p>深耕风险投资和科技创新领域，兼具学术研究与产业实践的双重背景。</p>
+                <p>毕业于北京大学，先后工作于腾讯及红杉资本，参与多家知名企业的投资并购、并担任多家科技公司董事，在“人工智能+X”方向孵化有教育、医疗、心理、艺术等领域的初创企业。</p>
+                <p>担任《生成式人工智能数据应用合规指南》团体标准起草人。</p>
+            </div>
+        </section>
 
-        <!-- Book Grid -->
-        <div id="book-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            <!-- Book cards will be generated by JS -->
-        </div>
+        <!-- 出版物展示区域 -->
+        <section id="publications-section">
+            <h2 class="text-2xl font-bold text-dark-text mb-6 border-b pb-2 border-primary-blue/30">已出版作品</h2>
+
+            <!-- 类别筛选 (Tabs) -->
+            <div class="flex space-x-1 p-1 mb-8 border-b border-gray-200 overflow-x-auto hide-scrollbar">
+                <button data-category="人工智能" class="tab-button px-4 py-2 text-lg text-gray-600 transition duration-300 border-b-2 border-transparent hover:border-primary-blue hover:text-primary-blue whitespace-nowrap">
+                    人工智能 (AI)
+                </button>
+                <button data-category="区块链" class="tab-button px-4 py-2 text-lg text-gray-600 transition duration-300 border-b-2 border-transparent hover:border-primary-blue hover:text-primary-blue whitespace-nowrap">
+                    区块链 (Blockchain)
+                </button>
+                <button data-category="创投" class="tab-button px-4 py-2 text-lg text-gray-600 transition duration-300 border-b-2 border-transparent hover:border-primary-blue hover:text-primary-blue whitespace-nowrap">
+                    创投 (Venture Capital)
+                </button>
+            </div>
+
+            <!-- 图书列表容器 -->
+            <div id="books-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Books will be rendered here by JavaScript -->
+                <div id="loading-indicator" class="col-span-full flex justify-center items-center py-10">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6 mt-12">
-        <div class="max-w-7xl mx-auto text-center">
-            <p>&copy; <span id="current-year"></span> 杜雨博士. 保留所有权利。</p>
+    <!-- 底部 (Footer) -->
+    <footer class="bg-white border-t mt-12 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+            <p>&copy; 2025 杜雨博士. 版权所有.</p>
         </div>
     </footer>
 
     <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        document.addEventListener('DOMContentLoaded', () => {
+            const publications = [
+                {
+                    category: "人工智能",
+                    books: [
+                        {
+                            title: "人形机器人：技术、产业与未来社会",
+                            publisher: "中国科学技术出版社",
+                            pubDate: "2025年8月",
+                            isbn: "9787523615218",
+                            wordCount: "36.4万",
+                            jdLink: "https://item.jd.com/15149246.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/331156/17/9588/74844/68ba4ce3F8817c525/bece5684497ecc7d.jpg.avif"
+                        },
+                        {
+                            title: "一本书学会Manus：AI智能体实战指南",
+                            publisher: "机械工业出版社",
+                            pubDate: "2025年7月",
+                            isbn: "9787111782841",
+                            wordCount: "11.4万",
+                            jdLink: "https://item.jd.com/14480171.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/298447/7/19633/55103/6861eb08Fe3725b87/26b7e109ac4135da.jpg.avif"
+                        },
+                        {
+                            title: "DeepSeek：读懂AI时代的底层逻辑",
+                            publisher: "中译出版社",
+                            pubDate: "2025年6月",
+                            isbn: "9787500182375",
+                            wordCount: "17.5万",
+                            jdLink: "https://item.jd.com/15088300.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/309486/22/17495/57620/68774b78F6ff4dc53/490ece65eade9bd6.jpg.avif"
+                        },
+                        {
+                            title: "DeepSeek使用指南：全职业场景应用实践",
+                            publisher: "机械工业出版社",
+                            pubDate: "2025年3月",
+                            isbn: "9787111778820",
+                            wordCount: "31.2万",
+                            jdLink: "https://item.jd.com/14394889.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/261429/12/25922/72610/67c16039F186769fb/0241e25611ec6103.jpg.avif"
+                        },
+                        {
+                            title: "具身智能：从虚拟AI到现实AI",
+                            publisher: "中译出版社",
+                            pubDate: "2024年9月",
+                            isbn: "9787500180548",
+                            wordCount: "9.3万",
+                            jdLink: "https://item.jd.com/14285449.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/235130/34/27685/89539/66f26a9fF9c0c086f/1d444c991c5dd555.jpg.avif"
+                        },
+                        {
+                            title: "AI for Science：人工智能驱动科学创新",
+                            publisher: "电子工业出版社",
+                            pubDate: "2024年7月",
+                            isbn: "9787121483974",
+                            wordCount: "18.3万",
+                            jdLink: "https://item.jd.com/14689652.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/244811/21/13692/136225/66863aa0Fa5aec3a0/094a8a90f66bcd46.jpg.avif"
+                        },
+                        {
+                            title: "AI助理：用ChatGPT轻松搞定工作",
+                            publisher: "人民邮电出版社",
+                            pubDate: "2024年4月",
+                            isbn: "9787115639714",
+                            wordCount: "10.9万",
+                            jdLink: "https://item.jd.com/14119307.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/158736/11/43559/124951/661643dfF6b56f679/f96c3cc465d6b090.jpg.avif"
+                        },
+                        {
+                            title: "AIGC：智能创作时代",
+                            publisher: "中译出版社",
+                            pubDate: "2023年2月",
+                            isbn: "9787500173458",
+                            wordCount: "12万",
+                            jdLink: "https://item.jd.com/13629191.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/95359/21/23142/77347/63e2f8d0Fa42eba73/d6da08ebe58355e1.jpg.avif"
+                        },
+                    ]
+                },
+                {
+                    category: "区块链",
+                    books: [
+                        {
+                            title: "稳定币：技术革命与金融新未来",
+                            publisher: "中译出版社",
+                            pubDate: "2025年11月",
+                            isbn: "9787500183860",
+                            wordCount: "17.5万",
+                            jdLink: "https://item.jd.com/10197355782128.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/354456/16/7412/37652/690d95acF385a92bc/9361c960af964d09.jpg.avif"
+                        },
+                        {
+                            title: "元宇宙地产：数实融合的商业场景",
+                            publisher: "清华大学出版社",
+                            pubDate: "2023年6月",
+                            isbn: "9787302632559",
+                            wordCount: "11.6万",
+                            jdLink: "https://item.jd.com/14043296.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/124385/23/38731/32852/64900047Fb53c0026/d091afd38f8157a9.jpg.avif"
+                        },
+                        {
+                            title: "元宇宙基础设施治理",
+                            publisher: "中国科学技术出版社",
+                            pubDate: "2023年3月",
+                            isbn: "9787523601082",
+                            wordCount: "20.1万",
+                            jdLink: "https://item.jd.com/13927976.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/100488/24/39344/57008/6436521cF37ac3f6f/130c76f550e909b1.jpg.avif"
+                        },
+                        {
+                            title: "WEB3.0：赋能数字经济新时代",
+                            publisher: "中译出版社",
+                            pubDate: "2022年6月",
+                            isbn: "9787500170938",
+                            wordCount: "13.1万",
+                            jdLink: "https://item.jd.com/13199203.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/205941/28/24077/131725/62a7dee5E80cddc0c/0cb9049aced21e8d.jpg.avif"
+                        },
+                    ]
+                },
+                {
+                    category: "创投",
+                    books: [
+                        {
+                            title: "投资于人",
+                            publisher: "中译出版社",
+                            pubDate: "2025年7月",
+                            isbn: "9787500183235",
+                            wordCount: "20.3万",
+                            jdLink: "https://item.jd.com/14493117.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/291737/3/15898/116678/6879bb20Ffea3bd4c/c716d87cc845b2bc.jpg.avif"
+                        },
+                        {
+                            title: "新极客：新一轮全球科技革命与中国创新逻辑",
+                            publisher: "中译出版社",
+                            pubDate: "2025年11月",
+                            isbn: "9787308268516",
+                            wordCount: "19.2万",
+                            jdLink: "https://item.jd.com/14590187.html",
+                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/362704/38/9553/70816/69240208Fb8ed05a4/0beef3873c105832.jpg.avif"
+                        },
+                    ]
+                },
+            ];
 
-        // --- Book Data ---
-        const books = [
-            // 一、人工智能 (AI)
-            { category: '人工智能', title: '人形机器人：技术、产业与未来社会', publisher: '中国科学技术出版社', date: '2025年8月出版', isbn: '9787523615218', words: '36.4万字', jdLink: 'https://item.jd.com/15149246.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/331156/17/9588/74844/68ba4ce3F8817c525/bece5684497ecc7d.jpg.avif' },
-            { category: '人工智能', title: '一本书学会Manus：AI智能体实战指南', publisher: '机械工业出版社', date: '2025年7月出版', isbn: '9787111782841', words: '11.4万字', jdLink: 'https://item.jd.com/14480171.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/298447/7/19633/55103/6861eb08Fe3725b87/26b7e109ac4135da.jpg.avif' },
-            { category: '人工智能', title: 'DeepSeek：读懂AI时代的底层逻辑', publisher: '中译出版社', date: '2025年6月出版', isbn: '9787500182375', words: '17.5万字', jdLink: 'https://item.jd.com/15088300.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/309486/22/17495/57620/68774b78F6ff4dc53/490ece65eade9bd6.jpg.avif' },
-            { category: '人工智能', title: 'DeepSeek使用指南：全职业场景应用实践', publisher: '机械工业出版社', date: '2025年3月出版', isbn: '9787111778820', words: '31.2万字', jdLink: 'https://item.jd.com/14394889.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/261429/12/25922/72610/67c16039F186769fb/0241e25611ec6103.jpg.avif' },
-            { category: '人工智能', title: '具身智能：从虚拟AI到现实AI', publisher: '中译出版社', date: '2024年9月出版', isbn: '9787500180548', words: '9.3万字', jdLink: 'https://item.jd.com/14285449.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/235130/34/27685/89539/66f26a9fF9c0c086f/1d444c991c5dd555.jpg.avif' },
-            { category: '人工智能', title: 'AI for Science：人工智能驱动科学创新', publisher: '电子工业出版社', date: '2024年7月出版', isbn: '9787121483974', words: '18.3万字', jdLink: 'https://item.jd.com/14689652.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/244811/21/13692/136225/66863aa0Fa5aec3a0/094a8a90f66bcd46.jpg.avif' },
-            { category: '人工智能', title: 'AI助理：用ChatGPT轻松搞定工作', publisher: '人民邮电出版社', date: '2024年4月出版', isbn: '9787115639714', words: '10.9万字', jdLink: 'https://item.jd.com/14119307.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/158736/11/43559/124951/661643dfF6b56f679/f96c3cc465d6b090.jpg.avif' },
-            { category: '人工智能', title: 'AIGC：智能创作时代', publisher: '中译出版社', date: '2023年2月出版', isbn: '9787500173458', words: '12万字', jdLink: 'https://item.jd.com/13629191.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/95359/21/23142/77347/63e2f8d0Fa42eba73/d6da08ebe58355e1.jpg.avif' },
+            const booksContainer = document.getElementById('books-container');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const loadingIndicator = document.getElementById('loading-indicator');
 
-            // 二、区块链 (Blockchain)
-            { category: '区块链', title: '稳定币：技术革命与金融新未来', publisher: '中译出版社', date: '2025年11月出版', isbn: '9787500183860', words: '17.5万字', jdLink: 'https://item.jd.com/10197355782128.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/354456/16/7412/37652/690d95acF385a92bc/9361c960af964d09.jpg.avif' },
-            { category: '区块链', title: '元宇宙地产：数实融合的商业场景', publisher: '清华大学出版社', date: '2023年6月出版', isbn: '9787302632559', words: '11.6万字', jdLink: 'https://item.jd.com/14043296.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/124385/23/38731/32852/64900047Fb53c0026/d091afd38f8157a9.jpg.avif' },
-            { category: '区块链', title: '元宇宙基础设施治理', publisher: '中国科学技术出版社', date: '2023年3月出版', isbn: '9787523601082', words: '20.1万字', jdLink: 'https://item.jd.com/13927976.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/100488/24/39344/57008/6436521cF37ac3f6f/130c76f550e909b1.jpg.avif' },
-            { category: '区块链', title: 'WEB3.0：赋能数字经济新时代', publisher: '中译出版社', date: '2022年6月出版', isbn: '9787500170938', words: '13.1万字', jdLink: 'https://item.jd.com/13199203.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/205941/28/24077/131725/62a7dee5E80cddc0c/0cb9049aced21e8d.jpg.avif' },
+            // Book Card HTML generation function
+            function createBookCard(book) {
+                // 使用 onError 属性来处理图片加载失败的情况，使用 placehold.co 作为占位图
+                const fallbackImg = `https://placehold.co/400x560/E5E7EB/4B5563?text=${encodeURIComponent(book.title)}&font=arial`;
 
-            // 三、创投 (Venture Capital)
-            { category: '创投', title: '投资于人', publisher: '中译出版社', date: '2025年7月出版', isbn: '9787500183235', words: '20.3万字', jdLink: 'https://item.jd.com/14493117.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/291737/3/15898/116678/6879bb20Ffea3bd4c/c716d87cc845b2bc.jpg.avif' },
-            { category: '创投', title: '新极客：新一轮全球科技革命与中国创新逻辑', publisher: '中译出版社', date: '2025年11月出版', isbn: '9787308268516', words: '19.2万字', jdLink: 'https://item.jd.com/14590187.html', cover: 'https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/362704/38/9553/70816/69240208Fb8ed05a4/0beef3873c105832.jpg.avif' },
-        ];
-
-        let activeCategory = '全部';
-
-        // 获取所有唯一的分类
-        const categories = ['全部', ...new Set(books.map(book => book.category))];
-        const bookListElement = document.getElementById('book-list');
-        const categoryTabsElement = document.getElementById('category-tabs');
-
-        // 1. 渲染分类按钮
-        function renderCategoryTabs() {
-            categoryTabsElement.innerHTML = '';
-            categories.forEach(category => {
-                const isActive = category === activeCategory;
-                const button = document.createElement('button');
-                
-                // Tailwind classes for button styling
-                button.className = `px-6 py-2 rounded-full font-medium transition-colors duration-200 shadow-md ${
-                    isActive 
-                        ? 'bg-indigo-600 text-white hover:bg-indigo-700' 
-                        : 'bg-white text-indigo-600 border border-indigo-300 hover:bg-indigo-50'
-                }`;
-                button.textContent = category;
-                button.dataset.category = category;
-                button.addEventListener('click', () => {
-                    setActiveCategory(category);
-                });
-                categoryTabsElement.appendChild(button);
-            });
-        }
-
-        // 2. 切换当前活跃分类
-        function setActiveCategory(category) {
-            activeCategory = category;
-            renderCategoryTabs();
-            renderBooks();
-        }
-
-        // 3. 渲染书籍列表
-        function renderBooks() {
-            bookListElement.innerHTML = ''; // Clear previous books
-            
-            // Filter books based on the active category
-            const filteredBooks = activeCategory === '全部' 
-                ? books 
-                : books.filter(book => book.category === activeCategory);
-
-            if (filteredBooks.length === 0) {
-                bookListElement.innerHTML = `<p class="col-span-full text-center text-xl text-gray-500 py-10">该分类下暂无出版物。</p>`;
-                return;
-            }
-
-            filteredBooks.forEach(book => {
-                const bookCard = document.createElement('div');
-                // Book card styling
-                bookCard.className = 'bg-white rounded-xl shadow-xl overflow-hidden transform transition duration-500 hover:scale-[1.02] hover:shadow-2xl';
-                
-                // HTML structure for a single book card
-                bookCard.innerHTML = `
-                    <div>
-                        <!-- Book Cover (with fallback) -->
-                        <div class="book-cover-wrapper overflow-hidden rounded-t-xl bg-gray-100">
-                            <img class="book-cover skeleton-load" 
-                                data-src="${book.cover}" 
-                                alt="${book.title} 封面" 
-                                onload="this.classList.remove('skeleton-load');"
-                                onerror="this.onerror=null; this.src='https://placehold.co/300x450/e0e7ff/4338ca?text=COVER';"
+                return `
+                    <div class="book-card bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden transform hover:scale-[1.02] border border-gray-100">
+                        <div class="relative">
+                            <img src="${book.coverImg}" 
+                                 alt="《${book.title}》封面" 
+                                 class="book-cover rounded-t-xl"
+                                 onerror="this.onerror=null;this.src='${fallbackImg}';"
                             >
+                            <span class="absolute top-0 right-0 bg-primary-blue text-white text-xs font-semibold px-3 py-1 rounded-bl-lg">${book.pubDate}</span>
                         </div>
-                        
-                        <!-- Book Details -->
-                        <div class="p-6">
-                            <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800 mb-2">
-                                ${book.category}
-                            </span>
-                            <h3 class="text-xl font-bold leading-snug text-gray-900 mb-3">${book.title}</h3>
-                            
-                            <ul class="text-sm text-gray-600 space-y-1">
-                                <li><span class="font-medium text-gray-700">出版社:</span> ${book.publisher}</li>
-                                <li><span class="font-medium text-gray-700">出版时间:</span> ${book.date}</li>
-                                <li><span class="font-medium text-gray-700">字数:</span> ${book.words}</li>
-                                <li><span class="font-medium text-gray-700">ISBN:</span> ${book.isbn}</li>
-                            </ul>
-                            
-                            <!-- JD Link Button -->
-                            <a href="${book.jdLink}" target="_blank" class="mt-4 w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2.586l1.293 1.293a1 1 0 001.414-1.414l-7-7a1 1 0 000-1.414z" clip-rule="evenodd"/></svg>
-                                京东购买链接
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-dark-text mb-2 line-clamp-2">${book.title}</h3>
+                            <div class="space-y-1 text-sm text-gray-600">
+                                <p><strong>出版社:</strong> ${book.publisher}</p>
+                                <p><strong>ISBN:</strong> ${book.isbn}</p>
+                                <p><strong>字数:</strong> ${book.wordCount}</p>
+                            </div>
+                            <a href="${book.jdLink}" target="_blank" class="mt-4 inline-flex items-center justify-center w-full px-4 py-2 bg-primary-blue text-white text-base font-medium rounded-lg shadow-md hover:bg-blue-700 transition duration-150">
+                                <span>京东购买</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4m-4-7h4m0 0v4m-4-4L9 15" />
+                                </svg>
                             </a>
                         </div>
                     </div>
                 `;
-                bookListElement.appendChild(bookCard);
-            });
-            lazyLoadImages(); // Trigger lazy loading after rendering
-        }
-
-        // 4. 实现图片懒加载
-        function lazyLoadImages() {
-            const lazyImages = document.querySelectorAll('img[data-src]');
-
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                            observer.unobserve(img);
-                        }
-                    });
-                });
-
-                lazyImages.forEach(img => {
-                    observer.observe(img);
-                });
-            } else {
-                // Fallback for older browsers (load all images immediately)
-                lazyImages.forEach(img => {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                });
             }
-        }
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', () => {
-            renderCategoryTabs();
-            renderBooks();
+            // Render books for a specific category
+            function renderBooks(category) {
+                loadingIndicator.classList.remove('hidden');
+                booksContainer.innerHTML = '';
+
+                // Simulate a slight delay for a smoother UX (showing the loading spinner)
+                setTimeout(() => {
+                    const categoryData = publications.find(p => p.category === category);
+                    
+                    if (categoryData && categoryData.books.length > 0) {
+                        const booksHtml = categoryData.books.map(createBookCard).join('');
+                        booksContainer.innerHTML = booksHtml;
+                    } else {
+                        booksContainer.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">暂无该分类的出版物信息。</p>`;
+                    }
+                    loadingIndicator.classList.add('hidden');
+                }, 300); // 300ms delay
+            }
+
+            // Handle tab switching
+            function handleTabClick(event) {
+                const selectedCategory = event.currentTarget.dataset.category;
+                
+                // Update active tab styles
+                tabButtons.forEach(button => {
+                    button.classList.remove('tab-active');
+                    if (button.dataset.category === selectedCategory) {
+                        button.classList.add('tab-active');
+                    }
+                });
+
+                renderBooks(selectedCategory);
+            }
+
+            // Add event listeners to buttons
+            tabButtons.forEach(button => {
+                button.addEventListener('click', handleTabClick);
+            });
+
+            // Initial load: Default to the first category ("人工智能")
+            if (tabButtons.length > 0) {
+                tabButtons[0].classList.add('tab-active');
+                tabButtons[0].click();
+            }
         });
     </script>
 </body>
