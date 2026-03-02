@@ -3,380 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>杜雨博士出版物</title>
-    <!-- 引入 Tailwind CSS CDN -->
+    <meta name="description" content="杜雨博士个人作品集 - 展示人工智能、创投、区块链领域的出版著作">
+    <title>杜雨博士 - 出版作品全集</title>
+    <!-- 使用 Tailwind CSS 进行快速样式构建 -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 配置 Tailwind 以支持中文和 Inter 字体 -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
-                        // 额外添加对中文友好的字体
-                        'chinese': ['Microsoft YaHei', 'SimSun', 'sans-serif']
-                    },
-                    colors: {
-                        'primary-blue': '#1D4ED8', // Darker Blue for main elements
-                        'light-bg': '#F9FAFB',
-                        'dark-text': '#1F2937',
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 确保所有中文文本都使用中文字体 */
-        .font-chinese {
-            font-family: 'Microsoft YaHei', 'SimSun', 'sans-serif';
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            scroll-behavior: smooth;
         }
 
-        /* 响应式图书封面高度 */
-        .book-cover {
-            width: 100%;
-            height: 250px; /* 默认：手机端使用较短的高度 */
-            object-fit: cover;
-            object-position: top; /* 确保封面顶部清晰可见 */
+        /* 移动端横向滚动条隐藏 */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        
-        /* 在平板及以上尺寸使用较高的高度 */
-        @media (min-width: 640px) { 
-            .book-cover {
-                height: 300px;
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .book-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (hover: hover) {
+            .book-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
             }
         }
 
-        /* 激活 Tab 样式 */
-        .tab-active {
-            border-color: #1D4ED8;
-            color: #1D4ED8;
-            font-weight: 600;
+        .nav-active {
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
         }
 
-        /* 隐藏滚动条但保留滚动功能 */
-        .hide-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none; /* Chrome, Safari and Opera */
-        }
-
-        /* 简单的 Loading 动画 */
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 4px solid #1D4ED8;
-            width: 40px;
-            height: 40px;
-            -webkit-animation: spin 1s linear infinite;
-            animation: spin 1s linear infinite;
-        }
-
-        @-webkit-keyframes spin {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .section-anchor {
+            scroll-margin-top: 100px;
         }
     </style>
 </head>
-<body class="bg-light-bg text-dark-text font-sans font-chinese antialiased">
+<body class="bg-slate-50">
 
-    <!-- 头部导航栏 (Sticky Header) - 优化移动端堆叠 -->
-    <header class="sticky top-0 z-10 bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row justify-between items-center">
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-primary-blue tracking-tight">杜雨 博士</h1>
-            <!-- 联系方式更紧凑，并在手机端堆叠 -->
-            <nav id="contact-nav" class="mt-2 sm:mt-0 flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-4 text-xs sm:text-sm text-gray-600 items-center">
-                <a href="mailto:duyu@weikezhi.cn" class="hover:text-primary-blue transition duration-150">📧 duyu@weikezhi.cn</a>
-                <span class="hidden sm:inline">|</span>
-                <span class="text-xs sm:text-sm">💬 duyuaigc</span>
-            </nav>
+    <!-- 顶部个人介绍区 -->
+    <header class="relative bg-slate-900 text-white pt-20 pb-16 px-6 overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-4xl mx-auto relative z-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">杜雨 博士</h1>
+            <p class="text-blue-400 text-xl font-medium mb-8">未可知人工智能研究院院长</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/10">
+                    <p class="flex items-start gap-3">
+                        <i class="fas fa-award text-yellow-500 mt-1"></i>
+                        <span>第十一届当当影响力作家</span>
+                    </p>
+                    <p class="flex items-start gap-3 mt-3">
+                        <i class="fas fa-graduation-cap text-blue-400 mt-1"></i>
+                        <span>北京大学毕业，曾任职于腾讯与红杉资本</span>
+                    </p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/10">
+                    <p class="flex items-start gap-3">
+                        <i class="fas fa-chart-line text-emerald-400 mt-1"></i>
+                        <span>深耕风险投资与科技创新，担任多家科技公司董事</span>
+                    </p>
+                    <p class="flex items-start gap-3 mt-3">
+                        <i class="fas fa-edit text-purple-400 mt-1"></i>
+                        <span>《生成式人工智能数据应用合规指南》标准起草人</span>
+                    </p>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12">
-
-        <!-- 作者简介区域 -->
-        <section id="author-bio" class="bg-white p-6 sm:p-8 rounded-xl shadow-lg mb-8 sm:mb-12">
-            <h2 class="text-xl sm:text-2xl font-bold text-dark-text mb-3 border-b pb-2 border-primary-blue/30">作者简介</h2>
-            <div class="text-gray-700 leading-relaxed space-y-2 text-sm sm:text-base">
-                <p>未可知人工智能研究院院长。</p>
-                <p>第十一届当当影响力作家。</p>
-                <p>深耕风险投资和科技创新领域，兼具学术研究与产业实践的双重背景。</p>
-                <p>毕业于北京大学，先后工作于腾讯及红杉资本，参与多家知名企业的投资并购、并担任多家科技公司董事，在“人工智能+X”方向孵化有教育、医疗、心理、艺术等领域的初创企业。</p>
-                <p>担任《生成式人工智能数据应用合规指南》团体标准起草人。</p>
+    <!-- 分类导航栏 (吸顶) -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex space-x-8 overflow-x-auto hide-scrollbar py-2">
+                    <a href="#ai" class="nav-link text-slate-600 hover:text-blue-600 font-bold whitespace-nowrap transition-colors">人工智能</a>
+                    <a href="#vc" class="nav-link text-slate-600 hover:text-blue-600 font-bold whitespace-nowrap transition-colors">创投领域</a>
+                    <a href="#web3" class="nav-link text-slate-600 hover:text-blue-600 font-bold whitespace-nowrap transition-colors">区块链</a>
+                    <a href="#contact" class="nav-link text-slate-600 hover:text-blue-600 font-bold whitespace-nowrap transition-colors">联络作者</a>
+                </div>
             </div>
-        </section>
+        </div>
+    </nav>
 
-        <!-- 出版物展示区域 -->
-        <section id="publications-section">
-            <h2 class="text-xl sm:text-2xl font-bold text-dark-text mb-5 border-b pb-2 border-primary-blue/30">已出版作品</h2>
-
-            <!-- 类别筛选 (Tabs) - 确保水平滚动 -->
-            <div class="flex space-x-1 p-1 mb-6 border-b border-gray-200 overflow-x-auto hide-scrollbar">
-                <button data-category="人工智能" class="tab-button px-3 py-2 text-base sm:text-lg text-gray-600 transition duration-300 border-b-2 border-transparent hover:border-primary-blue hover:text-primary-blue whitespace-nowrap">
-                    人工智能 (AI)
-                </button>
-                <button data-category="区块链" class="tab-button px-3 py-2 text-base sm:text-lg text-gray-600 transition duration-300 border-b-2 border-transparent hover:border-primary-blue hover:text-primary-blue whitespace-nowrap">
-                    区块链 (Blockchain)
-                </button>
-                <button data-category="创投" class="tab-button px-3 py-2 text-base sm:text-lg text-gray-600 transition duration-300 border-b-2 border-transparent hover:border-primary-blue hover:text-primary-blue whitespace-nowrap">
-                    创投 (Venture Capital)
-                </button>
+    <main class="max-w-7xl mx-auto px-4 py-12 md:px-8">
+        
+        <!-- 人工智能类 -->
+        <section id="ai" class="section-anchor mb-20">
+            <div class="flex items-baseline gap-3 mb-10 border-l-4 border-blue-600 pl-4">
+                <h2 class="text-3xl font-bold text-slate-900">人工智能</h2>
+                <span class="text-slate-400 text-lg">AI Series</span>
             </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- 书籍卡片模版开始 -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="relative group aspect-[3/4]">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/331156/17/9588/74844/68ba4ce3F8817c525/bece5684497ecc7d.jpg.avif" alt="人形机器人" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-white border border-white px-4 py-2 rounded-full">查看详情</span>
+                        </div>
+                    </div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《人形机器人：技术、产业与未来社会》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6">
+                            <p><i class="far fa-calendar-alt mr-2"></i>2025年8月 · 中国科学技术出版社</p>
+                            <p><i class="fas fa-barcode mr-2"></i>9787523615218</p>
+                            <p><i class="fas fa-font mr-2"></i>36.4万字</p>
+                        </div>
+                        <a href="https://item.jd.com/15149246.html" target="_blank" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">
+                            京东正版购买 <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- 书籍卡片结束 -->
 
-            <!-- 图书列表容器 - 保持移动端单列，平板以上多列 -->
-            <div id="books-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-                <!-- Books will be rendered here by JavaScript -->
-                <div id="loading-indicator" class="col-span-full flex justify-center items-center py-10">
-                    <div class="loader"></div>
+                <!-- Manus -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/298447/7/19633/55103/6861eb08Fe3725b87/26b7e109ac4135da.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《一本书学会Manus：AI智能体实战指南》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2025.07 · 机械工业出版社</p><p>ISBN: 9787111782841</p><p>11.4万字</p></div>
+                        <a href="https://item.jd.com/14480171.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
+                    </div>
+                </div>
+
+                <!-- DeepSeek Logic -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/309486/22/17495/57620/68774b78F6ff4dc53/490ece65eade9bd6.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《DeepSeek：读懂AI时代的底层逻辑》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2025.06 · 中译出版社</p><p>ISBN: 9787500182375</p><p>17.5万字</p></div>
+                        <a href="https://item.jd.com/15088300.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
+                    </div>
+                </div>
+
+                <!-- DeepSeek Practice -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/261429/12/25922/72610/67c16039F186769fb/0241e25611ec6103.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《DeepSeek使用指南：全职业场景应用实践》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2025.03 · 机械工业出版社</p><p>ISBN: 9787111778820</p><p>31.2万字</p></div>
+                        <a href="https://item.jd.com/14394889.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
+                    </div>
+                </div>
+
+                <!-- 具身智能 -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/235130/34/27685/89539/66f26a9fF9c0c086f/1d444c991c5dd555.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《具身智能：从虚拟AI到现实AI》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2024.09 · 中译出版社</p><p>ISBN: 9787500180548</p><p>9.3万字</p></div>
+                        <a href="https://item.jd.com/14285449.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
+                    </div>
+                </div>
+
+                <!-- AI for Science -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/244811/21/13692/136225/66863aa0Fa5aec3a0/094a8a90f66bcd46.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《AI for Science：人工智能驱动科学创新》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2024.07 · 电子工业出版社</p><p>ISBN: 9787121483974</p><p>18.3万字</p></div>
+                        <a href="https://item.jd.com/14689652.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
+                    </div>
+                </div>
+
+                <!-- AI助理 -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/158736/11/43559/124951/661643dfF6b56f679/f96c3cc465d6b090.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《AI助理：用ChatGPT轻松搞定工作》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2024.04 · 人民邮电出版社</p><p>ISBN: 9787115639714</p><p>10.9万字</p></div>
+                        <a href="https://item.jd.com/14119307.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
+                    </div>
+                </div>
+
+                <!-- AIGC -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/95359/21/23142/77347/63e2f8d0Fa42eba73/d6da08ebe58355e1.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《AIGC：智能创作时代》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2023.02 · 中译出版社</p><p>ISBN: 9787500173458</p><p>12万字</p></div>
+                        <a href="https://item.jd.com/13629191.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- 创投类 -->
+        <section id="vc" class="section-anchor mb-20">
+            <div class="flex items-baseline gap-3 mb-10 border-l-4 border-emerald-500 pl-4">
+                <h2 class="text-3xl font-bold text-slate-900">创投领域</h2>
+                <span class="text-slate-400 text-lg">Investment & Innovation</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- 投资于人 -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/291737/3/15898/116678/6879bb20Ffea3bd4c/c716d87cc845b2bc.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《投资于人》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2025.07 · 中译出版社</p><p>ISBN: 9787500183235</p><p>20.3万字</p></div>
+                        <a href="https://item.jd.com/14493117.html" class="flex items-center justify-center w-full py-3 px-4 bg-emerald-600 text-white rounded-xl font-medium hover:bg-emerald-700 transition-all text-sm">京东购买</a>
+                    </div>
+                </div>
+                <!-- 新极客 -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/362704/38/9553/70816/69240208Fb8ed05a4/0beef3873c105832.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《新极客：新一轮科技革命与创新逻辑》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2025.11 · 中译出版社</p><p>ISBN: 9787308268516</p><p>19.2万字</p></div>
+                        <a href="https://item.jd.com/14590187.html" class="flex items-center justify-center w-full py-3 px-4 bg-emerald-600 text-white rounded-xl font-medium hover:bg-emerald-700 transition-all text-sm">京东购买</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 区块链 -->
+        <section id="web3" class="section-anchor mb-20">
+            <div class="flex items-baseline gap-3 mb-10 border-l-4 border-purple-600 pl-4">
+                <h2 class="text-3xl font-bold text-slate-900">区块链</h2>
+                <span class="text-slate-400 text-lg">Blockchain & Web 3.0</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- 货币新秩序 -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/387864/8/21299/74733/6981720eFe9d5634e/004b3203209c5fe6.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《货币新秩序：稳定币与重塑金融体系》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2026.02 · 浙江大学出版社</p><p>ISBN: 9787308271745</p><p>21.2万字</p></div>
+                        <a href="https://item.jd.com/15314480.html" class="flex items-center justify-center w-full py-3 px-4 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-all text-sm">京东购买</a>
+                    </div>
+                </div>
+                <!-- 稳定币 -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/354456/16/7412/37652/690d95acF385a92bc/9361c960af964d09.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《稳定币：技术革命与金融新未来》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2025.11 · 中译出版社</p><p>ISBN: 9787500183860</p><p>17.5万字</p></div>
+                        <a href="https://item.jd.com/10197355782128.html" class="flex items-center justify-center w-full py-3 px-4 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-all text-sm">京东购买</a>
+                    </div>
+                </div>
+                <!-- 元宇宙地产 -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/124385/23/38731/32852/64900047Fb53c0026/d091afd38f8157a9.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《元宇宙地产：数实融合的商业场景》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2023.06 · 清华大学出版社</p><p>ISBN: 9787302632559</p><p>11.6万字</p></div>
+                        <a href="https://item.jd.com/14043296.html" class="flex items-center justify-center w-full py-3 px-4 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-all text-sm">京东购买</a>
+                    </div>
+                </div>
+                <!-- WEB3.0 -->
+                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/205941/28/24077/131725/62a7dee5E80cddc0c/0cb9049aced21e8d.jpg.avif" class="w-full h-full object-cover"></div>
+                    <div class="p-5 flex-grow">
+                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《WEB3.0：赋能数字经济新时代》</h3>
+                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2022.06 · 中译出版社</p><p>ISBN: 9787500170938</p><p>13.1万字</p></div>
+                        <a href="https://item.jd.com/13199203.html" class="flex items-center justify-center w-full py-3 px-4 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-all text-sm">京东购买</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- 底部 (Footer) -->
-    <footer class="bg-white border-t mt-8 py-5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-xs sm:text-sm">
-            <p>&copy; 2025 杜雨博士. 版权所有.</p>
+    <!-- 联系与脚注 -->
+    <footer id="contact" class="bg-slate-900 text-white py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">与杜雨博士联络</h2>
+                <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-16">
+                <div class="group bg-slate-800/50 p-8 rounded-3xl border border-slate-700 hover:border-blue-500 transition-all text-center">
+                    <div class="w-16 h-16 bg-blue-600/10 text-blue-400 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-paper-plane text-2xl"></i>
+                    </div>
+                    <h4 class="text-slate-400 text-sm uppercase tracking-wider mb-2">商务及学术合作</h4>
+                    <p class="text-xl font-bold select-all">duyu@weikezhi.cn</p>
+                </div>
+
+                <div class="group bg-slate-800/50 p-8 rounded-3xl border border-slate-700 hover:border-emerald-500 transition-all text-center">
+                    <div class="w-16 h-16 bg-emerald-600/10 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-weixin text-2xl"></i>
+                    </div>
+                    <h4 class="text-slate-400 text-sm uppercase tracking-wider mb-2">读者及粉丝交流</h4>
+                    <p class="text-xl font-bold select-all">duyuaigc</p>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 text-center text-slate-500 text-sm">
+                <p class="mb-2">© 2025 杜雨 (Dr. Du Yu). All rights reserved.</p>
+                <p>未可知人工智能研究院 (Weikezhi AI Research)</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const publications = [
-                {
-                    category: "人工智能",
-                    books: [
-                        {
-                            title: "人形机器人：技术、产业与未来社会",
-                            publisher: "中国科学技术出版社",
-                            pubDate: "2025年8月",
-                            isbn: "9787523615218",
-                            wordCount: "36.4万",
-                            jdLink: "https://item.jd.com/15149246.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/331156/17/9588/74844/68ba4ce3F8817c525/bece5684497ecc7d.jpg.avif"
-                        },
-                        {
-                            title: "一本书学会Manus：AI智能体实战指南",
-                            publisher: "机械工业出版社",
-                            pubDate: "2025年7月",
-                            isbn: "9787111782841",
-                            wordCount: "11.4万",
-                            jdLink: "https://item.jd.com/14480171.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/298447/7/19633/55103/6861eb08Fe3725b87/26b7e109ac4135da.jpg.avif"
-                        },
-                        {
-                            title: "DeepSeek：读懂AI时代的底层逻辑",
-                            publisher: "中译出版社",
-                            pubDate: "2025年6月",
-                            isbn: "9787500182375",
-                            wordCount: "17.5万",
-                            jdLink: "https://item.jd.com/15088300.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/309486/22/17495/57620/68774b78F6ff4dc53/490ece65eade9bd6.jpg.avif"
-                        },
-                        {
-                            title: "DeepSeek使用指南：全职业场景应用实践",
-                            publisher: "机械工业出版社",
-                            pubDate: "2025年3月",
-                            isbn: "9787111778820",
-                            wordCount: "31.2万",
-                            jdLink: "https://item.jd.com/14394889.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/261429/12/25922/72610/67c16039F186769fb/0241e25611ec6103.jpg.avif"
-                        },
-                        {
-                            title: "具身智能：从虚拟AI到现实AI",
-                            publisher: "中译出版社",
-                            pubDate: "2024年9月",
-                            isbn: "9787500180548",
-                            wordCount: "9.3万",
-                            jdLink: "https://item.jd.com/14285449.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/235130/34/27685/89539/66f26a9fF9c0c086f/1d444c991c5dd555.jpg.avif"
-                        },
-                        {
-                            title: "AI for Science：人工智能驱动科学创新",
-                            publisher: "电子工业出版社",
-                            pubDate: "2024年7月",
-                            isbn: "9787121483974",
-                            wordCount: "18.3万",
-                            jdLink: "https://item.jd.com/14689652.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/244811/21/13692/136225/66863aa0Fa5aec3a0/094a8a90f66bcd46.jpg.avif"
-                        },
-                        {
-                            title: "AI助理：用ChatGPT轻松搞定工作",
-                            publisher: "人民邮电出版社",
-                            pubDate: "2024年4月",
-                            isbn: "9787115639714",
-                            wordCount: "10.9万",
-                            jdLink: "https://item.jd.com/14119307.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/158736/11/43559/124951/661643dfF6b56f679/f96c3cc465d6b090.jpg.avif"
-                        },
-                        {
-                            title: "AIGC：智能创作时代",
-                            publisher: "中译出版社",
-                            pubDate: "2023年2月",
-                            isbn: "9787500173458",
-                            wordCount: "12万",
-                            jdLink: "https://item.jd.com/13629191.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/95359/21/23142/77347/63e2f8d0Fa42eba73/d6da08ebe58355e1.jpg.avif"
-                        },
-                    ]
-                },
-                {
-                    category: "区块链",
-                    books: [
-                        {
-                            title: "稳定币：技术革命与金融新未来",
-                            publisher: "中译出版社",
-                            pubDate: "2025年11月",
-                            isbn: "9787500183860",
-                            wordCount: "17.5万",
-                            jdLink: "https://item.jd.com/10197355782128.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/354456/16/7412/37652/690d95acF385a92bc/9361c960af964d09.jpg.avif"
-                        },
-                        {
-                            title: "元宇宙地产：数实融合的商业场景",
-                            publisher: "清华大学出版社",
-                            pubDate: "2023年6月",
-                            isbn: "9787302632559",
-                            wordCount: "11.6万",
-                            jdLink: "https://item.jd.com/14043296.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/124385/23/38731/32852/64900047Fb53c0026/d091afd38f8157a9.jpg.avif"
-                        },
-                        {
-                            title: "元宇宙基础设施治理",
-                            publisher: "中国科学技术出版社",
-                            pubDate: "2023年3月",
-                            isbn: "9787523601082",
-                            wordCount: "20.1万",
-                            jdLink: "https://item.jd.com/13927976.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/100488/24/39344/57008/6436521cF37ac3f6f/130c76f550e909b1.jpg.avif"
-                        },
-                        {
-                            title: "WEB3.0：赋能数字经济新时代",
-                            publisher: "中译出版社",
-                            pubDate: "2022年6月",
-                            isbn: "9787500170938",
-                            wordCount: "13.1万",
-                            jdLink: "https://item.jd.com/13199203.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/205941/28/24077/131725/62a7dee5E80cddc0c/0cb9049aced21e8d.jpg.avif"
-                        },
-                    ]
-                },
-                {
-                    category: "创投",
-                    books: [
-                        {
-                            title: "投资于人",
-                            publisher: "中译出版社",
-                            pubDate: "2025年7月",
-                            isbn: "9787500183235",
-                            wordCount: "20.3万",
-                            jdLink: "https://item.jd.com/14493117.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/291737/3/15898/116678/6879bb20Ffea3bd4c/c716d87cc845b2bc.jpg.avif"
-                        },
-                        {
-                            title: "新极客：新一轮全球科技革命与中国创新逻辑",
-                            publisher: "中译出版社",
-                            pubDate: "2025年11月",
-                            isbn: "9787308268516",
-                            wordCount: "19.2万",
-                            jdLink: "https://item.jd.com/14590187.html",
-                            coverImg: "https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/362704/38/9553/70816/69240208Fb8ed05a4/0beef3873c105832.jpg.avif"
-                        },
-                    ]
-                },
-            ];
+        // 处理导航链接的高亮切换
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section-anchor');
 
-            const booksContainer = document.getElementById('books-container');
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const loadingIndicator = document.getElementById('loading-indicator');
-
-            // Book Card HTML generation function
-            function createBookCard(book) {
-                // 使用 onError 属性来处理图片加载失败的情况，使用 placehold.co 作为占位图
-                const fallbackImg = `https://placehold.co/400x560/E5E7EB/4B5563?text=${encodeURIComponent(book.title)}&font=arial`;
-
-                return `
-                    <div class="book-card bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden transform hover:scale-[1.02] border border-gray-100">
-                        <div class="relative">
-                            <img src="${book.coverImg}" 
-                                 alt="《${book.title}》封面" 
-                                 class="book-cover rounded-t-xl"
-                                 onerror="this.onerror=null;this.src='${fallbackImg}';"
-                            >
-                            <span class="absolute top-0 right-0 bg-primary-blue text-white text-xs font-semibold px-2 py-1 rounded-bl-lg">${book.pubDate}</span>
-                        </div>
-                        <div class="p-4 sm:p-5">
-                            <h3 class="text-lg sm:text-xl font-bold text-dark-text mb-2 line-clamp-2">${book.title}</h3>
-                            <div class="space-y-1 text-xs sm:text-sm text-gray-600">
-                                <p><strong>出版社:</strong> ${book.publisher}</p>
-                                <p><strong>ISBN:</strong> ${book.isbn}</p>
-                                <p><strong>字数:</strong> ${book.wordCount}</p>
-                            </div>
-                            <a href="${book.jdLink}" target="_blank" class="mt-3 sm:mt-4 inline-flex items-center justify-center w-full px-4 py-2 bg-primary-blue text-white text-sm sm:text-base font-medium rounded-lg shadow-md hover:bg-blue-700 transition duration-150">
-                                <span>京东购买</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4m-4-7h4m0 0v4m-4-4L9 15" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                `;
-            }
-
-            // Render books for a specific category
-            function renderBooks(category) {
-                loadingIndicator.classList.remove('hidden');
-                booksContainer.innerHTML = '';
-
-                // Simulate a slight delay for a smoother UX (showing the loading spinner)
-                setTimeout(() => {
-                    const categoryData = publications.find(p => p.category === category);
-                    
-                    if (categoryData && categoryData.books.length > 0) {
-                        // 确保新书排在前面 (按出版日期排序) - 可以在此处实现按日期排序
-                        categoryData.books.sort((a, b) => new Date(b.pubDate.replace('年', '-').replace('月', '')) - new Date(a.pubDate.replace('年', '-').replace('月', '')));
-
-                        const booksHtml = categoryData.books.map(createBookCard).join('');
-                        booksContainer.innerHTML = booksHtml;
-                    } else {
-                        booksContainer.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">暂无该分类的出版物信息。</p>`;
-                    }
-                    loadingIndicator.classList.add('hidden');
-                }, 300); // 300ms delay
-            }
-
-            // Handle tab switching
-            function handleTabClick(event) {
-                const selectedCategory = event.currentTarget.dataset.category;
-                
-                // Update active tab styles
-                tabButtons.forEach(button => {
-                    button.classList.remove('tab-active');
-                    if (button.dataset.category === selectedCategory) {
-                        button.classList.add('tab-active');
-                    }
-                });
-
-                renderBooks(selectedCategory);
-            }
-
-            // Add event listeners to buttons
-            tabButtons.forEach(button => {
-                button.addEventListener('click', handleTabClick);
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
             });
 
-            // Initial load: Default to the first category ("人工智能")
-            if (tabButtons.length > 0) {
-                // 模拟点击第一个按钮，触发样式和内容加载
-                tabButtons[0].click();
-            }
+            navLinks.forEach((link) => {
+                link.classList.remove("nav-active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("nav-active");
+                }
+            });
+        });
+
+        // 图片延迟加载或加载失败处理
+        document.querySelectorAll('img').forEach(img => {
+            img.onerror = function() {
+                this.src = 'https://placehold.co/400x600?text=' + encodeURIComponent(this.alt);
+            };
         });
     </script>
 </body>
