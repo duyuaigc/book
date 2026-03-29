@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="杜雨博士个人作品集 - 展示人工智能、创投、区块链领域的出版著作">
-    <title>杜雨博士 - 出版作品全集</title>
-    <!-- 使用 Tailwind CSS 进行快速样式构建 -->
+    <title>杜雨博士作品集 - 未可知人工智能研究院</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入 Font Awesome 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
@@ -16,331 +13,343 @@
             font-family: 'Noto Sans SC', sans-serif;
             background-color: #f8fafc;
             color: #1e293b;
-            scroll-behavior: smooth;
         }
 
-        /* 移动端横向滚动条隐藏 */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .book-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        @media (hover: hover) {
+        @media (min-width: 1024px) {
             .book-card:hover {
                 transform: translateY(-8px);
-                box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             }
         }
 
-        .nav-active {
-            color: #2563eb;
-            border-bottom: 2px solid #2563eb;
+        .category-pill {
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .section-anchor {
-            scroll-margin-top: 100px;
+        .category-pill.active {
+            background-color: #2563eb;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.4);
+        }
+
+        .bg-gradient-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+        }
+
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
     </style>
 </head>
-<body class="bg-slate-50">
+<body>
 
-    <!-- 顶部个人介绍区 -->
-    <header class="relative bg-slate-900 text-white pt-20 pb-16 px-6 overflow-hidden">
-        <!-- 背景装饰 -->
-        <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl"></div>
-        
-        <div class="max-w-4xl mx-auto relative z-10 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">杜雨 博士</h1>
-            <p class="text-blue-400 text-xl font-medium mb-8">未可知人工智能研究院院长</p>
+    <!-- Header Section -->
+    <header class="bg-gradient-header text-white pt-12 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4">杜雨 博士</h1>
+            <p class="text-blue-200 text-lg md:text-xl font-light mb-8">未可知人工智能研究院院长 | 当当影响力作家</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-                <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/10">
-                    <p class="flex items-start gap-3">
-                        <i class="fas fa-award text-yellow-500 mt-1"></i>
-                        <span>第十一届当当影响力作家</span>
-                    </p>
-                    <p class="flex items-start gap-3 mt-3">
-                        <i class="fas fa-graduation-cap text-blue-400 mt-1"></i>
-                        <span>北京大学毕业，曾任职于腾讯与红杉资本</span>
-                    </p>
-                </div>
-                <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/10">
-                    <p class="flex items-start gap-3">
-                        <i class="fas fa-chart-line text-emerald-400 mt-1"></i>
-                        <span>深耕风险投资与科技创新，担任多家科技公司董事</span>
-                    </p>
-                    <p class="flex items-start gap-3 mt-3">
-                        <i class="fas fa-edit text-purple-400 mt-1"></i>
-                        <span>《生成式人工智能数据应用合规指南》标准起草人</span>
-                    </p>
-                </div>
+            <div class="glass-effect rounded-2xl p-6 text-slate-800 text-left shadow-2xl border border-white/20">
+                <h2 class="text-xl font-bold mb-3 flex items-center">
+                    <i class="fas fa-user-tie mr-2 text-blue-600"></i> 作者简介
+                </h2>
+                <p class="text-sm md:text-base leading-relaxed text-slate-600">
+                    深耕风险投资和科技创新领域，兼具学术研究与产业实践的双重背景。毕业于北京大学，先后工作于腾讯及红杉资本。在“人工智能+X”方向孵化有教育、医疗、心理、艺术等领域的初创企业，担任《生成式人工智能数据应用合规指南》团体标准起草人。
+                </p>
             </div>
         </div>
     </header>
 
-    <!-- 分类导航栏 (吸顶) -->
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-200">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex space-x-8 overflow-x-auto hide-scrollbar py-2">
-                    <a href="#ai" class="nav-link text-slate-600 hover:text-blue-600 font-bold whitespace-nowrap transition-colors">人工智能</a>
-                    <a href="#vc" class="nav-link text-slate-600 hover:text-blue-600 font-bold whitespace-nowrap transition-colors">创投领域</a>
-                    <a href="#web3" class="nav-link text-slate-600 hover:text-blue-600 font-bold whitespace-nowrap transition-colors">区块链</a>
-                    <a href="#contact" class="nav-link text-slate-600 hover:text-blue-600 font-bold whitespace-nowrap transition-colors">联络作者</a>
-                </div>
+    <!-- Filter Navigation -->
+    <nav class="sticky-nav glass-effect border-b border-slate-200 py-4 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 overflow-x-auto no-scrollbar">
+            <div class="flex space-x-3 justify-start md:justify-center min-w-max">
+                <button onclick="filterBooks('all')" id="btn-all" class="category-pill active px-6 py-2 rounded-full border border-slate-200 font-medium">全部作品</button>
+                <button onclick="filterBooks('ai')" id="btn-ai" class="category-pill px-6 py-2 rounded-full border border-slate-200 font-medium">人工智能</button>
+                <button onclick="filterBooks('vc')" id="btn-vc" class="category-pill px-6 py-2 rounded-full border border-slate-200 font-medium">创投</button>
+                <button onclick="filterBooks('crypto')" id="btn-crypto" class="category-pill px-6 py-2 rounded-full border border-slate-200 font-medium">区块链</button>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4 py-12 md:px-8">
-        
-        <!-- 人工智能类 -->
-        <section id="ai" class="section-anchor mb-20">
-            <div class="flex items-baseline gap-3 mb-10 border-l-4 border-blue-600 pl-4">
-                <h2 class="text-3xl font-bold text-slate-900">人工智能</h2>
-                <span class="text-slate-400 text-lg">AI Series</span>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- 书籍卡片模版开始 -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="relative group aspect-[3/4]">
-                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/331156/17/9588/74844/68ba4ce3F8817c525/bece5684497ecc7d.jpg.avif" alt="人形机器人" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <span class="text-white border border-white px-4 py-2 rounded-full">查看详情</span>
-                        </div>
+    <!-- Books Grid -->
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        <div id="books-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- AI Books -->
+            <div class="book-item ai" data-category="ai">
+                <div class="book-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full">
+                    <div class="relative pt-[130%] bg-slate-100">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/405887/15/6191/62985/69bba862Fc41165b4/004b320320373d2b.jpg.avif" 
+                             alt="养龙虾" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs px-2 py-1 rounded">2026.03</div>
                     </div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《人形机器人：技术、产业与未来社会》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6">
-                            <p><i class="far fa-calendar-alt mr-2"></i>2025年8月 · 中国科学技术出版社</p>
-                            <p><i class="fas fa-barcode mr-2"></i>9787523615218</p>
-                            <p><i class="fas fa-font mr-2"></i>36.4万字</p>
-                        </div>
-                        <a href="https://item.jd.com/15149246.html" target="_blank" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">
-                            京东正版购买 <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 line-clamp-2">《养龙虾：OpenClaw与AI智能体时代》</h3>
+                        <p class="text-xs text-slate-500 mb-4 flex-grow">中译出版社 | ISBN: 9787500100000 | 13.3万字</p>
+                        <a href="https://item.jd.com/15341598.html" target="_blank" class="w-full bg-slate-900 text-white text-center py-2.5 rounded-xl font-medium hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>京东购买
                         </a>
                     </div>
                 </div>
-                <!-- 书籍卡片结束 -->
+            </div>
 
-                <!-- Manus -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/298447/7/19633/55103/6861eb08Fe3725b87/26b7e109ac4135da.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《一本书学会Manus：AI智能体实战指南》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2025.07 · 机械工业出版社</p><p>ISBN: 9787111782841</p><p>11.4万字</p></div>
-                        <a href="https://item.jd.com/14480171.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
+            <div class="book-item ai" data-category="ai">
+                <div class="book-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full">
+                    <div class="relative pt-[130%] bg-slate-100">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/410513/34/3310/58826/69c5e394F9905a0e3/004b3203204f6c8d.jpg.avif" 
+                             alt="AI知识库" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs px-2 py-1 rounded">2026.03</div>
                     </div>
-                </div>
-
-                <!-- DeepSeek Logic -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/309486/22/17495/57620/68774b78F6ff4dc53/490ece65eade9bd6.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《DeepSeek：读懂AI时代的底层逻辑》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2025.06 · 中译出版社</p><p>ISBN: 9787500182375</p><p>17.5万字</p></div>
-                        <a href="https://item.jd.com/15088300.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
-                    </div>
-                </div>
-
-                <!-- DeepSeek Practice -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/261429/12/25922/72610/67c16039F186769fb/0241e25611ec6103.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《DeepSeek使用指南：全职业场景应用实践》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2025.03 · 机械工业出版社</p><p>ISBN: 9787111778820</p><p>31.2万字</p></div>
-                        <a href="https://item.jd.com/14394889.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
-                    </div>
-                </div>
-
-                <!-- 具身智能 -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/235130/34/27685/89539/66f26a9fF9c0c086f/1d444c991c5dd555.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《具身智能：从虚拟AI到现实AI》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2024.09 · 中译出版社</p><p>ISBN: 9787500180548</p><p>9.3万字</p></div>
-                        <a href="https://item.jd.com/14285449.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
-                    </div>
-                </div>
-
-                <!-- AI for Science -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/244811/21/13692/136225/66863aa0Fa5aec3a0/094a8a90f66bcd46.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《AI for Science：人工智能驱动科学创新》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2024.07 · 电子工业出版社</p><p>ISBN: 9787121483974</p><p>18.3万字</p></div>
-                        <a href="https://item.jd.com/14689652.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
-                    </div>
-                </div>
-
-                <!-- AI助理 -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/158736/11/43559/124951/661643dfF6b56f679/f96c3cc465d6b090.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《AI助理：用ChatGPT轻松搞定工作》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2024.04 · 人民邮电出版社</p><p>ISBN: 9787115639714</p><p>10.9万字</p></div>
-                        <a href="https://item.jd.com/14119307.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
-                    </div>
-                </div>
-
-                <!-- AIGC -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/95359/21/23142/77347/63e2f8d0Fa42eba73/d6da08ebe58355e1.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《AIGC：智能创作时代》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2023.02 · 中译出版社</p><p>ISBN: 9787500173458</p><p>12万字</p></div>
-                        <a href="https://item.jd.com/13629191.html" class="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white rounded-xl font-medium hover:bg-blue-600 transition-all">京东购买</a>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 line-clamp-2">《AI知识库极简入门》</h3>
+                        <p class="text-xs text-slate-500 mb-4 flex-grow">机械工业出版社 | ISBN: 9787111806103 | 31.2万字</p>
+                        <a href="https://item.jd.com/15348116.html" target="_blank" class="w-full bg-slate-900 text-white text-center py-2.5 rounded-xl font-medium hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>京东购买
+                        </a>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- 创投类 -->
-        <section id="vc" class="section-anchor mb-20">
-            <div class="flex items-baseline gap-3 mb-10 border-l-4 border-emerald-500 pl-4">
-                <h2 class="text-3xl font-bold text-slate-900">创投领域</h2>
-                <span class="text-slate-400 text-lg">Investment & Innovation</span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- 投资于人 -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/291737/3/15898/116678/6879bb20Ffea3bd4c/c716d87cc845b2bc.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《投资于人》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2025.07 · 中译出版社</p><p>ISBN: 9787500183235</p><p>20.3万字</p></div>
-                        <a href="https://item.jd.com/14493117.html" class="flex items-center justify-center w-full py-3 px-4 bg-emerald-600 text-white rounded-xl font-medium hover:bg-emerald-700 transition-all text-sm">京东购买</a>
+            <div class="book-item ai" data-category="ai">
+                <div class="book-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full">
+                    <div class="relative pt-[130%] bg-slate-100">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/331156/17/9588/74844/68ba4ce3F8817c525/bece5684497ecc7d.jpg.avif" 
+                             alt="人形机器人" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs px-2 py-1 rounded">2025.08</div>
                     </div>
-                </div>
-                <!-- 新极客 -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/362704/38/9553/70816/69240208Fb8ed05a4/0beef3873c105832.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《新极客：新一轮科技革命与创新逻辑》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2025.11 · 中译出版社</p><p>ISBN: 9787308268516</p><p>19.2万字</p></div>
-                        <a href="https://item.jd.com/14590187.html" class="flex items-center justify-center w-full py-3 px-4 bg-emerald-600 text-white rounded-xl font-medium hover:bg-emerald-700 transition-all text-sm">京东购买</a>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 line-clamp-2">《人形机器人：技术、产业与未来社会》</h3>
+                        <p class="text-xs text-slate-500 mb-4 flex-grow">中国科学技术出版社 | ISBN: 9787523615218 | 36.4万字</p>
+                        <a href="https://item.jd.com/15149246.html" target="_blank" class="w-full bg-slate-900 text-white text-center py-2.5 rounded-xl font-medium hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>京东购买
+                        </a>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- 区块链 -->
-        <section id="web3" class="section-anchor mb-20">
-            <div class="flex items-baseline gap-3 mb-10 border-l-4 border-purple-600 pl-4">
-                <h2 class="text-3xl font-bold text-slate-900">区块链</h2>
-                <span class="text-slate-400 text-lg">Blockchain & Web 3.0</span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- 货币新秩序 -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/387864/8/21299/74733/6981720eFe9d5634e/004b3203209c5fe6.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《货币新秩序：稳定币与重塑金融体系》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2026.02 · 浙江大学出版社</p><p>ISBN: 9787308271745</p><p>21.2万字</p></div>
-                        <a href="https://item.jd.com/15314480.html" class="flex items-center justify-center w-full py-3 px-4 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-all text-sm">京东购买</a>
+            <div class="book-item ai" data-category="ai">
+                <div class="book-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full">
+                    <div class="relative pt-[130%] bg-slate-100">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/298447/7/19633/55103/6861eb08Fe3725b87/26b7e109ac4135da.jpg.avif" 
+                             alt="Manus" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs px-2 py-1 rounded">2025.07</div>
                     </div>
-                </div>
-                <!-- 稳定币 -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/354456/16/7412/37652/690d95acF385a92bc/9361c960af964d09.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《稳定币：技术革命与金融新未来》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2025.11 · 中译出版社</p><p>ISBN: 9787500183860</p><p>17.5万字</p></div>
-                        <a href="https://item.jd.com/10197355782128.html" class="flex items-center justify-center w-full py-3 px-4 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-all text-sm">京东购买</a>
-                    </div>
-                </div>
-                <!-- 元宇宙地产 -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/124385/23/38731/32852/64900047Fb53c0026/d091afd38f8157a9.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《元宇宙地产：数实融合的商业场景》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2023.06 · 清华大学出版社</p><p>ISBN: 9787302632559</p><p>11.6万字</p></div>
-                        <a href="https://item.jd.com/14043296.html" class="flex items-center justify-center w-full py-3 px-4 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-all text-sm">京东购买</a>
-                    </div>
-                </div>
-                <!-- WEB3.0 -->
-                <div class="book-card bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                    <div class="aspect-[3/4]"><img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/205941/28/24077/131725/62a7dee5E80cddc0c/0cb9049aced21e8d.jpg.avif" class="w-full h-full object-cover"></div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-slate-900 mb-2 leading-snug h-12 overflow-hidden">《WEB3.0：赋能数字经济新时代》</h3>
-                        <div class="text-xs text-slate-500 space-y-1.5 mb-6"><p>2022.06 · 中译出版社</p><p>ISBN: 9787500170938</p><p>13.1万字</p></div>
-                        <a href="https://item.jd.com/13199203.html" class="flex items-center justify-center w-full py-3 px-4 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-all text-sm">京东购买</a>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 line-clamp-2">《一本书学会Manus：AI智能体实战指南》</h3>
+                        <p class="text-xs text-slate-500 mb-4 flex-grow">机械工业出版社 | ISBN: 9787111782841 | 11.4万字</p>
+                        <a href="https://item.jd.com/14480171.html" target="_blank" class="w-full bg-slate-900 text-white text-center py-2.5 rounded-xl font-medium hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>京东购买
+                        </a>
                     </div>
                 </div>
             </div>
-        </section>
 
+            <div class="book-item ai" data-category="ai">
+                <div class="book-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full">
+                    <div class="relative pt-[130%] bg-slate-100">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/309486/22/17495/57620/68774b78F6ff4dc53/490ece65eade9bd6.jpg.avif" 
+                             alt="DeepSeek底层逻辑" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs px-2 py-1 rounded">2025.06</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 line-clamp-2">《DeepSeek：读懂AI时代的底层逻辑》</h3>
+                        <p class="text-xs text-slate-500 mb-4 flex-grow">中译出版社 | ISBN: 9787500182375 | 17.5万字</p>
+                        <a href="https://item.jd.com/15088300.html" target="_blank" class="w-full bg-slate-900 text-white text-center py-2.5 rounded-xl font-medium hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>京东购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-item ai" data-category="ai">
+                <div class="book-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full">
+                    <div class="relative pt-[130%] bg-slate-100">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/261429/12/25922/72610/67c16039F186769fb/0241e25611ec6103.jpg.avif" 
+                             alt="DeepSeek指南" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs px-2 py-1 rounded">2025.03</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 line-clamp-2">《DeepSeek使用指南：全职业场景应用实践》</h3>
+                        <p class="text-xs text-slate-500 mb-4 flex-grow">机械工业出版社 | ISBN: 9787111778820 | 31.2万字</p>
+                        <a href="https://item.jd.com/14394889.html" target="_blank" class="w-full bg-slate-900 text-white text-center py-2.5 rounded-xl font-medium hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>京东购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VC Books -->
+            <div class="book-item vc" data-category="vc">
+                <div class="book-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full">
+                    <div class="relative pt-[130%] bg-slate-100">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/291737/3/15898/116678/6879bb20Ffea3bd4c/c716d87cc845b2bc.jpg.avif" 
+                             alt="投资于人" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-emerald-600 text-white text-xs px-2 py-1 rounded">2025.07</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 line-clamp-2">《投资于人》</h3>
+                        <p class="text-xs text-slate-500 mb-4 flex-grow">中译出版社 | ISBN: 9787500183235 | 20.3万字</p>
+                        <a href="https://item.jd.com/14493117.html" target="_blank" class="w-full bg-slate-900 text-white text-center py-2.5 rounded-xl font-medium hover:bg-emerald-700 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>京东购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-item vc" data-category="vc">
+                <div class="book-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full">
+                    <div class="relative pt-[130%] bg-slate-100">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/362704/38/9553/70816/69240208Fb8ed05a4/0beef3873c105832.jpg.avif" 
+                             alt="新极客" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-emerald-600 text-white text-xs px-2 py-1 rounded">2025.11</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 line-clamp-2">《新极客：新一轮全球科技革命与中国创新逻辑》</h3>
+                        <p class="text-xs text-slate-500 mb-4 flex-grow">中译出版社 | ISBN: 9787308268516 | 19.2万字</p>
+                        <a href="https://item.jd.com/14590187.html" target="_blank" class="w-full bg-slate-900 text-white text-center py-2.5 rounded-xl font-medium hover:bg-emerald-700 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>京东购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crypto Books -->
+            <div class="book-item crypto" data-category="crypto">
+                <div class="book-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full">
+                    <div class="relative pt-[130%] bg-slate-100">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/387864/8/21299/74733/6981720eFe9d5634e/004b3203209c5fe6.jpg.avif" 
+                             alt="货币新秩序" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-orange-600 text-white text-xs px-2 py-1 rounded">2026.02</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 line-clamp-2">《货币新秩序：稳定币重塑金融体系》</h3>
+                        <p class="text-xs text-slate-500 mb-4 flex-grow">浙江大学出版社 | ISBN: 9787308271745 | 21.2万字</p>
+                        <a href="https://item.jd.com/15314480.html" target="_blank" class="w-full bg-slate-900 text-white text-center py-2.5 rounded-xl font-medium hover:bg-orange-700 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>京东购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-item crypto" data-category="crypto">
+                <div class="book-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full">
+                    <div class="relative pt-[130%] bg-slate-100">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/354456/16/7412/37652/690d95acF385a92bc/9361c960af964d09.jpg.avif" 
+                             alt="稳定币" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-orange-600 text-white text-xs px-2 py-1 rounded">2025.11</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 line-clamp-2">《稳定币：技术革命与金融新未来》</h3>
+                        <p class="text-xs text-slate-500 mb-4 flex-grow">中译出版社 | ISBN: 9787500183860 | 17.5万字</p>
+                        <a href="https://item.jd.com/10197355782128.html" target="_blank" class="w-full bg-slate-900 text-white text-center py-2.5 rounded-xl font-medium hover:bg-orange-700 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>京东购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More AI Books (Older) -->
+            <div class="book-item ai" data-category="ai">
+                <div class="book-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full">
+                    <div class="relative pt-[130%] bg-slate-100">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/235130/34/27685/89539/66f26a9fF9c0c086f/1d444c991c5dd555.jpg.avif" 
+                             alt="具身智能" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs px-2 py-1 rounded">2024.09</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 line-clamp-2">《具身智能：从虚拟AI到现实AI》</h3>
+                        <p class="text-xs text-slate-500 mb-4 flex-grow">中译出版社 | ISBN: 9787500180548 | 9.3万字</p>
+                        <a href="https://item.jd.com/14285449.html" target="_blank" class="w-full bg-slate-900 text-white text-center py-2.5 rounded-xl font-medium hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>京东购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-item ai" data-category="ai">
+                <div class="book-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col h-full">
+                    <div class="relative pt-[130%] bg-slate-100">
+                        <img src="https://img10.360buyimg.com/pcpubliccms/s1440x1440_jfs/t1/205941/28/24077/131725/62a7dee5E80cddc0c/0cb9049aced21e8d.jpg.avif" 
+                             alt="Web3" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-orange-600 text-white text-xs px-2 py-1 rounded">2022.06</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 line-clamp-2">《WEB3.0：赋能数字经济新时代》</h3>
+                        <p class="text-xs text-slate-500 mb-4 flex-grow">中译出版社 | ISBN: 9787500170938 | 13.1万字</p>
+                        <a href="https://item.jd.com/13199203.html" target="_blank" class="w-full bg-slate-900 text-white text-center py-2.5 rounded-xl font-medium hover:bg-orange-700 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>京东购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <!-- 联系与脚注 -->
-    <footer id="contact" class="bg-slate-900 text-white py-20 px-6">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">与杜雨博士联络</h2>
-                <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-16">
-                <div class="group bg-slate-800/50 p-8 rounded-3xl border border-slate-700 hover:border-blue-500 transition-all text-center">
-                    <div class="w-16 h-16 bg-blue-600/10 text-blue-400 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-paper-plane text-2xl"></i>
-                    </div>
-                    <h4 class="text-slate-400 text-sm uppercase tracking-wider mb-2">商务及学术合作</h4>
-                    <p class="text-xl font-bold select-all">duyu@weikezhi.cn</p>
+    <!-- Footer / Contact -->
+    <footer class="bg-slate-900 text-white py-16 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-8">联系杜雨博士</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
+                    <i class="fas fa-envelope text-blue-400 text-2xl mb-3"></i>
+                    <p class="text-slate-300">电子邮箱</p>
+                    <p class="text-lg font-medium">duyu@weikezhi.cn</p>
                 </div>
-
-                <div class="group bg-slate-800/50 p-8 rounded-3xl border border-slate-700 hover:border-emerald-500 transition-all text-center">
-                    <div class="w-16 h-16 bg-emerald-600/10 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fab fa-weixin text-2xl"></i>
-                    </div>
-                    <h4 class="text-slate-400 text-sm uppercase tracking-wider mb-2">读者及粉丝交流</h4>
-                    <p class="text-xl font-bold select-all">duyuaigc</p>
+                <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
+                    <i class="fab fa-weixin text-emerald-400 text-2xl mb-3"></i>
+                    <p class="text-slate-300">微信号</p>
+                    <p class="text-lg font-medium">duyuaigc</p>
                 </div>
             </div>
-
-            <div class="border-t border-slate-800 pt-8 text-center text-slate-500 text-sm">
-                <p class="mb-2">© 2025 杜雨 (Dr. Du Yu). All rights reserved.</p>
-                <p>未可知人工智能研究院 (Weikezhi AI Research)</p>
+            <div class="border-t border-slate-800 pt-8 text-slate-500 text-sm">
+                <p>© 2026 未可知人工智能研究院. All Rights Reserved.</p>
+                <p class="mt-2">致力于人工智能、创投及区块链领域的前沿研究与出版</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // 处理导航链接的高亮切换
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('.section-anchor');
+        function filterBooks(category) {
+            const items = document.querySelectorAll('.book-item');
+            const buttons = document.querySelectorAll('.category-pill');
+            
+            // Update Active Button
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('btn-' + category).classList.add('active');
 
-        window.addEventListener('scroll', () => {
-            let current = "";
-            sections.forEach((section) => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 150) {
-                    current = section.getAttribute("id");
+            // Filter Logic
+            items.forEach(item => {
+                if (category === 'all') {
+                    item.style.display = 'block';
+                } else {
+                    if (item.getAttribute('data-category') === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
                 }
             });
+        }
 
-            navLinks.forEach((link) => {
-                link.classList.remove("nav-active");
-                if (link.getAttribute("href").includes(current)) {
-                    link.classList.add("nav-active");
-                }
-            });
-        });
-
-        // 图片延迟加载或加载失败处理
-        document.querySelectorAll('img').forEach(img => {
-            img.onerror = function() {
-                this.src = 'https://placehold.co/400x600?text=' + encodeURIComponent(this.alt);
-            };
-        });
+        // Initialize display
+        window.onload = function() {
+            filterBooks('all');
+        }
     </script>
 </body>
 </html>
